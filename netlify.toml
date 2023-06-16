@@ -1,0 +1,33 @@
+# netlify.toml
+
+[build]
+  command = "npm run build" # The build command for your project
+  publish = "build" # The directory containing the built project files
+
+[[redirects]]
+  from = "/*" # Redirect all routes
+  to = "/index.html" # To the index.html file
+
+[[headers]]
+  for = "/*" # Apply headers to all routes
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Content-Security-Policy = "default-src 'self'"
+
+[[headers]]
+  for = "/*.js" # Apply headers to JavaScript files
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css" # Apply headers to CSS files
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/sw.js" # Apply headers to service worker file
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
