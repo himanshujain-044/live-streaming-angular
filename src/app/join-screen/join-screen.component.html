@@ -1,0 +1,87 @@
+<div id="joinPage" class="main-bg" style="display: flex">
+  <div style="margin: auto; display: flex; align-items: center">
+    <div
+      style="
+        width: 550px;
+        height: 300px;
+        margin-right: 30px;
+        position: relative;
+        border-radius: 10px;
+      "
+    >
+      <video
+        style="
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+          background-color: lightgray;
+        "
+        autoplay
+        muted
+        [playsInline]="true"
+        #videoPlayer
+      ></video>
+    </div>
+    <div style="width: 350px">
+      <h3 style="text-align: center">AngularJS quickstart with Videosdk</h3>
+      <form name="myForm">
+        <div style="display: flex; flex-direction: column">
+          <div *ngIf="isCreatedMeetingClicked || isJoinedMeetingClicked">
+            <span>name</span>
+            <input
+              class="join-screen-input"
+              name="participantName"
+              type="text"
+              [(ngModel)]="participantName"
+              (ngModelChange)="fireChangeName()"
+            />
+            <p *ngIf="showParticipantNameError" class="input-err">
+              Please enter atleast 3 characers
+            </p>
+          </div>
+
+          <div *ngIf="isJoinedMeetingClicked" style="margin-top: 10px">
+            <span>meetingId</span>
+            <input
+              class="join-screen-input"
+              name="meetingId"
+              type="text"
+              [(ngModel)]="meetingId"
+              (ngModelChange)="fireChangeName()"
+            />
+            <p *ngIf="showMeetingIdError" class="input-err">
+              Please enter valid meeting Id
+            </p>
+          </div>
+
+          <div *ngIf="isCreatedMeetingClicked">
+            <div style="margin-top: 8px">
+              <span>meetingId</span>
+              <p class="join-screen-p">{{ meetingId }}</p>
+            </div>
+          </div>
+
+          <div *ngIf="!isCreatedMeetingClicked && !isJoinedMeetingClicked">
+            <button class="join-screen-btn" (click)="fireCreateMeeting()">
+              Create a meeting
+            </button>
+            <button (click)="fireJoinMeeting()" class="join-screen-btn">
+              Join a meeting
+            </button>
+          </div>
+          <div *ngIf="isCreatedMeetingClicked">
+            <button class="join-screen-btn" (click)="fireStartMeeting()">
+              Start a Meeting
+            </button>
+          </div>
+          <div *ngIf="isJoinedMeetingClicked">
+            <button (click)="fireValidateMeeting()" class="join-screen-btn">
+              Join a meeting
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
