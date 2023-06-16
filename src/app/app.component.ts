@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { VideoSDK } from '@videosdk.live/js-sdk';
-import { environment } from './../enviroments/enviroment';
+import { environment } from '../environment/environment';
 import { MeetingService } from './meeting.service';
 
 @Component({
